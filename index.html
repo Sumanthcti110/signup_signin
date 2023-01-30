@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <base target="_top">
+    <script>
+      function AddRow()
+    {
+      var usernamee = document.getElementById("usernamee").value;
+      var passwordd = document.getElementById("passwordd").value;
+      var email = document.getElementById("email").value;
+      var phone = document.getElementById("phone").value;
+      if (usernamee==""|| passwordd==""|| email==""|| phone=="") {
+        return false;
+      }
+      else {
+      google.script.run.AddRecord(usernamee,passwordd,email,phone);
+      document.getElementById("page2_id1").className = "page2_id1-off";
+      document.getElementById("page3_id1").className = "page3_id1";
+     }
+    }
+
+     function LoginUser()
+    {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+    google.script.run.withSuccessHandler(function(output) 
+    {
+      if(output == 'TRUE')
+      {
+         document.getElementById("displayusername").innerHTML = username;
+         document.getElementById("page1_id1").className = "page1_class1-off";
+         document.getElementById("page4_id1").className = "page4_id1";    
+      }
+      else if(output == 'FALSE')
+      {
+        document.getElementById("errorMessage").innerHTML = "Invalid data";     
+      }    
+    }).checkLogin(username, password);
+    }
+    
+function function1(){
+    document.getElementById("page1_id1").className = "page1_class1-off";
+    document.getElementById("page2_id1").className = "page2_id1";
+}
+ 
+function function3(){ 
+  document.getElementById("page3_id1").className = "page3_id1-off";
+  document.getElementById("page1_id1").className = "page1_id1"; 
+}
+
+  </script>
+  <style>
+
+/*page1*/
+.page1_class1-off{
+    display: none;
+  }
+
+
+/*page2*/
+.page2_class1{
+    display: none;
+  }
+
+.page2_id1-off{
+    display:none;
+}
+
+/*page3*/
+.page3_class1{
+    display:none;
+
+}
+.page3_id1-off{
+    display:none;
+}
+
+/*page4*/
+.page4_class1{
+    display:none;
+
+}
+.page4_id1-off{
+    display:none;
+}
+
+        body{
+	margin:0;
+	color:#6a6f8c;
+	background:#c8c8c8;
+	font:600 16px/18px 'Open Sans',sans-serif;
+}
+*,:after,:before{box-sizing:border-box}
+.clearfix:after,.clearfix:before{content:'';display:table}
+.clearfix:after{clear:both;display:block}
+a{color:inherit;text-decoration:none}
+
+.login-wrap{
+	width:100%;
+	margin:auto;
+	max-width:525px;
+	min-height:670px;
+	position:relative;
+	background:url("img/") no-repeat center;
+	box-shadow:0 12px 15px 0 rgba(0,0,0,.24),0 17px 50px 0 rgba(0,0,0,.19);
+}
+.login-html{
+	width:100%;
+	height:100%;
+	position:absolute;
+	padding:20px 70px 50px 70px;
+	background:rgba(8, 11, 20, 0.9);
+}
+.login-html .sign-in-htm,
+.login-html .sign-up-htm{
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	position:absolute;
+	transform:rotateY(180deg);
+	backface-visibility:hidden;
+	transition:all .4s linear;
+}
+.login-html .sign-in,
+.login-html .sign-up,
+.login-form .group .check{
+	display:none;
+}
+.login-html .tab,
+.login-form .group .label,
+.login-form .group .button{
+	text-transform:uppercase;
+}
+.login-html .tab{
+	font-size:22px;
+	margin-right:15px;
+	padding-bottom:5px;
+	margin:0 15px 10px 0;
+	display:inline-block;
+	border-bottom:2px solid transparent;
+}
+.login-html .sign-in:checked + .tab,
+.login-html .sign-up:checked + .tab{
+	color:#fff;
+	border-color:#ffea00;
+}
+.login-form{
+	min-height:345px;
+	position:relative;
+	perspective:1000px;
+	transform-style:preserve-3d;
+}
+.login-form .group{
+	margin-bottom:15px;
+}
+.login-form .group .label,
+.login-form .group .input,
+.login-form .group .button{
+	width:100%;
+	color:#fff;
+	display:block;
+}
+.login-form .group .input,
+.login-form .group .button{
+	border:none;
+	padding:15px 20px;
+	border-radius:25px;
+	background:rgba(255,255,255,.1);
+}
+.login-form .group input[data-type="password"]{
+	text-security :circle;
+	-webkit-text-security:circle;
+}
+.login-form .group .label{
+	color:#aaa;
+	font-size:12px;
+}
+.login-form .group .button{
+	background: linear-gradient( 270deg, #3f5efb, #fc466b );
+}
+.login-form .group label .icon{
+	width:15px;
+	height:15px;
+	border-radius:2px;
+	position:relative;
+	display:inline-block;
+	background:rgba(255,255,255,.1);
+}
+.login-form .group label .icon:before,
+.login-form .group label .icon:after{
+	content:'';
+	width:10px;
+	height:2px;
+	background:#fff;
+	position:absolute;
+	transition:all .2s ease-in-out 0s;
+}
+.login-form .group label .icon:before{
+	left:3px;
+	width:5px;
+	bottom:6px;
+	transform:scale(0) rotate(0);
+}
+.login-form .group label .icon:after{
+	top:6px;
+	right:0;
+	transform:scale(0) rotate(0);
+}
+.login-form .group .check:checked + label{
+	color:#fff;
+}
+.login-form .group .check:checked + label .icon{
+	background: linear-gradient( 270deg, #3f5efb, #fc466b );
+}
+.login-form .group .check:checked + label .icon:before{
+	transform:scale(1) rotate(45deg);
+}
+.login-form .group .check:checked + label .icon:after{
+	transform:scale(1) rotate(-45deg);
+}
+.login-html .sign-in:checked + .tab + .sign-up + .tab + .login-form .sign-in-htm{
+	transform:rotate(0);
+}
+.login-html .sign-up:checked + .tab + .login-form .sign-up-htm{
+	transform:rotate(0);
+}
+
+.hr{
+	height:2px;
+	margin:60px 0 50px 0;
+	background:rgba(255,255,255,.2);
+}
+.foot-lnk{
+	text-align:center;
+}
+     
+/* input[type=text]:hover{
+        border-bottom:2px solid black;
+      }
+input[type=number]:hover{
+        border-bottom:2px solid black;
+      }
+input[type=password]:hover{
+        border-bottom:2px solid black;
+      } */
+   
+.user{
+display: inline-block;
+width: 75px;
+height: 75px;
+border: 8px solid black;
+border-radius: 50%;
+position: relative;
+overflow: hidden;
+box-sizing: border-box;
+}
+
+h1 {
+    font-size: 30px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    background: linear-gradient( 270deg, #3f5efb, #fc466b );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+/* 
+/*the head/*/
+/* .user::before{
+content: '';
+display: inline-block;
+width: 24px;
+height: 24px;
+background: black;
+border-radius: 50%;
+position: absolute;
+left: calc(50% - 11px);
+top: 10px;
+}
+
+/*the body
+.user::after{
+content: '';
+display: inline-block;
+width:50px;
+height:40px;
+background: black;
+border-radius: 50%;
+position: absolute;
+left: calc(50% - 24px);
+top: 39px;*/
+
+</style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+<!--page1-->
+
+    <div class="login-wrap">
+        <div class="login-html">
+            <div class="login-form">
+                <div class="page1_class1" id="page1_id1">
+                    
+                        <h1>Login Form</h1><br>
+                        <div class="group">
+                            <label for="user" class="label">Username</label>
+                            <input type="text" class="input" id="username" placeholder="Username"><br>
+                            <br>
+                        </div>
+                        <div class="group">
+                            <label for="pass" class="label">Password</label>
+                            <input type="password" class="input" id="password" placeholder="Password">
+                            <br><span id="errorMessage" style="color: red" ></span><br>
+                        </div>
+                        <div class="group">
+                            <input id="check" type="checkbox" class="check" checked>
+                            <label for="check"><span class="icon"></span> Keep me Signed in</label>
+                        </div>
+                        <div class="group">
+                            <input type="submit"class="button" value="Login" onclick="LoginUser()"><br>
+                            <br>
+                        </div>
+                        <div class="group">
+                            <b>If you don't have an account,</b>
+                            <input type="button"class="button" onClick="function1()" value="Create New">
+                        </div>
+                </div>   
+
+<!--page2-->
+                    <div class="page2_class1" id="page2_id1">
+                       <h1>Create Account</h1>
+                       <div class="group">
+                            <label for="user" class="label">Username</label>
+                            <input type="text"class="input" id="usernamee" placeholder="Name"><br>
+                            <br>
+                       </div>
+                       <div class="group">
+                            <label for="pass" class="label">Password</label>
+                            <input type="password"class="input" id="passwordd" placeholder="Create password" ><br>
+                            <br>
+                       </div>
+                       <div class="group">  
+                            <label for="pass" class="label">Email Address</label>
+                            <input type="text"class="input" id="email" placeholder="Email" ><br>
+                            <br>
+                       </div>
+                       <div class="group">    
+                            <label for="pass" class="label">Phone no.</label>
+                            <input type="number"class="input" id="phone" placeholder="Phone no."><br><br>
+                       </div>   
+                       <div class="group">
+                           <input type="submit"class="button" value="Create" onclick="AddRow()">
+                           <br>
+                       </div>
+                    </div>
+
+<!--page3-->
+                    <div class="page3_class1" id="page3_id1" >
+                       <div class="group"> 
+                           <h2> Your account has been successfully created. Login to your account</h2>
+                           <input type="submit" class="button" onClick="function3()" value="Login" ><br>
+                       </div>    
+                    </div> 
+
+<!--page4-->
+                    <div class="page4_class1" id="page4_id1">
+                        <br>
+                        <div class="group"> 
+                          <h2>Hi <b id="displayusername" style="color:red;"></b>!</h2>
+                        </div>
+                          <div class="user"></div>
+                            <h2> You are successfully logged in.</h2>
+                            <h2>**************</h2>
+                            <br>
+                    </div>
+                
+            </div>
+        </div>
+    </div>                
+
+  </body>
+</html>
